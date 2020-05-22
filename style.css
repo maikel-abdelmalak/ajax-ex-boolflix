@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+}
+
+.clearfix{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.float{
+    width: 50%;
+    float: left;
+}
+
+header{
+    background-color: #111;
+    padding: 15px 50px;
+    width: 100%;
+}
+
+.logo{
+    color: #E50914;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.search{
+    padding-top: 10px;
+    text-align: right;
+}
+
+main{
+    background-color: #444;
+    height: calc(100vh - 75px);
+}
