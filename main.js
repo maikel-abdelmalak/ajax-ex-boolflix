@@ -1,7 +1,12 @@
 $(document).ready(function(){
 //intercetto il click sul bottone e richiamo la funzione cerca_film
 $('.search button').on('click', cerca_film)
+$('.search input').keypress(function(event) {
+  if ( event.which == 13 ) {
+     cerca_film();
+ }
 
+})
 
 //FUNZIONI
 function cerca_film (){
@@ -20,11 +25,14 @@ function cerca_film (){
             success: function(data){
                 //recupero i risultati
                 var film = data.results
+                //ciclo gli oggetti all'interno dell'array film
                 for (var i = 0; i < film.length; i++) {
+                    //recupero i 4 dati
                     var titolo = film[i].title;
                     var titoloOriginale = film[i].original_title;
                     var lingua= film[i].original_language;
                     var voto = film[i].vote_average;
+                    //con handlebars creo una lista in cui inserisco i dati di ogni film
                     var source   = $('#ul-template').html()
                     var template = Handlebars.compile(source);
                     var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:voto}
@@ -41,12 +49,8 @@ function cerca_film (){
                 var html = template(context);
                 $('main').append(html);
             }
-
-
         })
-
-
     }
-
 }
+
 })
