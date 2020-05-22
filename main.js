@@ -1,13 +1,14 @@
 $(document).ready(function(){
-
+//intercetto il click sul bottone e richiamo la funzione cerca_film
 $('.search button').on('click', cerca_film)
 
 
-
+//FUNZIONI
 function cerca_film (){
+    //recupero il valore dell'input
     var ricerca = $('.search input').val()
+    //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
     if(ricerca != ''){
-
         $.ajax({
 
             'url': 'https://api.themoviedb.org/3/search/movie',
@@ -17,13 +18,18 @@ function cerca_film (){
                 'query': ricerca,
             },
             success: function(data){
+                //recupero i risultati
                 var film = data.results
                 for (var i = 0; i < film.length; i++) {
                     var titolo = film[i].title;
-                    var titoloOriginale = film[i].title;
-                    var lingua= film[i].title;
-                    var voto = film[i].title;
-                    console.log(stampa);
+                    var titoloOriginale = film[i].original_title;
+                    var lingua= film[i].original_language;
+                    var voto = film[i].vote_average;
+                    var source   = $('#ul-template').html()
+                    var template = Handlebars.compile(source);
+                    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:voto}
+                    var html = template(context);
+                    $('main').append(html);
                 }
 
             },

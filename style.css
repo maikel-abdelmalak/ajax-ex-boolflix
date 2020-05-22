@@ -43,6 +43,7 @@ header{
 main{
     background-color: #444;
     height: calc(100vh - 75px);
+    overflow: scroll;
 }
 
 .errore{
@@ -51,4 +52,9 @@ main{
     font-weight: bold;
     text-align: center;
     padding-top: 45px;
+}
+
+ul{
+    padding: 20px;
+    border: 2px solid #fff;
 }
