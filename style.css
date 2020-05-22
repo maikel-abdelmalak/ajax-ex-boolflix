@@ -33,7 +33,22 @@ header{
     text-align: right;
 }
 
+.search button{
+    padding: 5px;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+}
+
 main{
     background-color: #444;
     height: calc(100vh - 75px);
+}
+
+.errore{
+    color:#fff;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 45px;
 }
