@@ -7,12 +7,13 @@ $('.search input').keypress(function(event) {
  }
 
 })
-
+stars(7.6)
 //FUNZIONI
 function cerca_film (){
     //recupero il valore dell'input
     var ricerca = $('.search input').val()
     //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
+    $('main').empty()
     if(ricerca != ''){
         $.ajax({
 
@@ -53,4 +54,9 @@ function cerca_film (){
     }
 }
 
+function stars(voto){
+    var rate = voto / 2;
+    var rate = Math.round(rate)
+    console.log(rate);
+}
 })

@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: #444;
+}
+
 .clearfix{
     content: '';
     display: table;
@@ -41,9 +45,7 @@ header{
 }
 
 main{
-    background-color: #444;
-    height: calc(100vh - 75px);
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .errore{
@@ -57,4 +59,8 @@ main{
 ul{
     padding: 20px;
     border: 2px solid #fff;
+    width: 200px;
+    margin: 10px;
+    float: left;
+    list-style: none;
 }
