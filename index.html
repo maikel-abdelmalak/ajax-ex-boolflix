@@ -23,13 +23,16 @@
 
 
         </main>
-        <script id="ul-template" type="text/x-handlebars-template">
-            <ul class='board'>
-                <li>Titolo:{{titolo}}</li>
-                <li>Titolo-originale:{{titoloOriginale}}</li>
-                <li> {{{lingua}}}</li>
-                <li>{{{voto}}}</li>
-            </ul>
+        <script id="board-template" type="text/x-handlebars-template">
+            <div class="board">
+                <img class:"poster" src="{{poster}}" alt="">
+                <ul class='board-info'>
+                    <li>Titolo:{{titolo}}</li>
+                    <li>Titolo-originale:{{titoloOriginale}}</li>
+                    <li>{{{lingua}}}</li>
+                    <li>{{{voto}}}</li>
+                </ul>
+            </div>
         </script>
         <script id="errore-template" type="text/x-handlebars-template">
             <div class="errore">

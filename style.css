@@ -62,15 +62,23 @@ main{
 }
 
 .board{
+    width: 230px;
+    height: 300px;
+    margin: 10px;
+    position: relative;
+}
+
+.board-info{
     padding: 20px;
     border: 2px solid #fff;
-    width: 200px;
-    margin: 10px;
+    width: 100%;
     list-style: none;
 }
 
-.board img{
+.board-info img{
     width: 25px;
+    position: absolute;
+    top: 10px;
 }
 
 .fas.fa-star{

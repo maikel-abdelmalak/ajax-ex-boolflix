@@ -31,14 +31,15 @@ function cerca_film (){
             },
             success: function(data){
                 //recupero i risultati
-                var tv = data.results
+                var film = data.results
                 //ciclo gli oggetti all'interno dell'array film
-                for (var i = 0; i < tv.length; i++) {
+                for (var i = 0; i < film.length; i++) {
                     //recupero i 4 dati
-                    var titolo = tv[i].title;
-                    var titoloOriginale = tv[i].original_title;
-                    var lingua= tv[i].original_language;
-                    var voto = tv[i].vote_average;
+                    var titolo = film[i].title;
+                    var titoloOriginale = film[i].original_title;
+                    var lingua= film[i].original_language;
+                    var voto = film[i].vote_average;
+                    var poster = film[i].backdrop_path;
 
                     append_board(titolo, titoloOriginale, lingua, voto)
                 }
@@ -73,14 +74,15 @@ function cerca_serie (){
             },
             success: function(data){
                 //recupero i risultati
-                var film = data.results
+                var tv = data.results
                 //ciclo gli oggetti all'interno dell'array film
-                for (var i = 0; i < film.length; i++) {
+                for (var i = 0; i < tv.length; i++) {
                     //recupero i 4 dati
-                    var titolo = film[i].name;
-                    var titoloOriginale = film[i].original_name;
-                    var lingua= film[i].original_language;
-                    var voto = film[i].vote_average;
+                    var titolo = tv[i].name;
+                    var titoloOriginale = tv[i].original_name;
+                    var lingua= tv[i].original_language;
+                    var voto = tv[i].vote_average;
+                    var poster = tv[i].backdrop_path
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
                     append_board(titolo, titoloOriginale, lingua, voto)
                 }
@@ -100,16 +102,18 @@ function cerca_serie (){
 
 
 
-function append_board(titolo, titoloOriginale, lingua, voto){
-    //con handlebars creo una lista in cui inserisco i dati di ogni film
+function append_board(titolo, titoloOriginale, lingua, voto, poster){
+    //con handlebarsinserisco i dati nel dom
+    var sfondo = 'https://image.tmdb.org/t/p/w185/'+poster;
     var stato = bandiera(lingua)
     var stelle = stars(voto)
-    var source   = $('#ul-template').html()
+    var source   = $('#board-template').html()
     var template = Handlebars.compile(source);
-    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle}
+    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle, poster:sfondo}
     var html = template(context);
     $('main').append(html);
 }
+//funzione per stampare le stelle che rappresentano il voto
 function stars(nu){
     var rate = nu / 2;
     var rate = Math.round(rate)
@@ -127,6 +131,7 @@ function stars(nu){
 
 }
 
+//se la bandiera è presente la inserisco altrimenti stampo la siglia
 function bandiera(sigla){
     if(sigla == 'en'|| sigla == 'it'|| sigla == 'fr'){
         var stato = '<img src="img/'+sigla+'.png" alt="">'
