@@ -7,7 +7,7 @@ $('.search input').keypress(function(event) {
  }
 
 })
-stars(7.6)
+
 //FUNZIONI
 function cerca_film (){
     //recupero il valore dell'input
@@ -34,9 +34,12 @@ function cerca_film (){
                     var lingua= film[i].original_language;
                     var voto = film[i].vote_average;
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
+                    var t = stars(voto)
+                    console.log(t);
+                    console.log(voto);
                     var source   = $('#ul-template').html()
                     var template = Handlebars.compile(source);
-                    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:voto}
+                    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:t}
                     var html = template(context);
                     $('main').append(html);
                 }
@@ -54,9 +57,23 @@ function cerca_film (){
     }
 }
 
-function stars(voto){
-    var rate = voto / 2;
+function stars(nu){
+    var rate = nu / 2;
     var rate = Math.round(rate)
-    console.log(rate);
+    console.log('questo è il rate' + rate);
+    var stars_gold = '';
+    var stars_white = '';
+    var s = 5 - rate;
+    console.log('s: ' + s);
+    for (var i = 0; i < rate; i++) {
+        var stars_gold = stars_gold + '<i class="fas fa-star"></i>';
+}
+console.log('i' + i);
+    for (var c = 0; c < s; c++) {
+        var stars_white = stars_white + '<i class="far fa-star"></i>';
+}
+    var star = stars_gold + stars_white;
+    return star
+
 }
 })
