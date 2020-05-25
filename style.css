@@ -26,6 +26,7 @@ header{
     width: 100%;
     position: fixed;
     top: 0;
+    z-index: 22;
 }
 
 .logo{
@@ -62,25 +63,38 @@ main{
 }
 
 .board{
-    width: 230px;
+    width: 185px;
     height: 300px;
     margin: 10px;
     position: relative;
+    display: flex;
 }
 
 .board-info{
     padding: 20px;
     border: 2px solid #fff;
     width: 100%;
+    height: 100%;
+    background-color: grey;
+    color: #fff;
     list-style: none;
+    position: absolute;
+    top: 0px;
+    display: none
 }
 
 .board-info img{
     width: 25px;
-    position: absolute;
-    top: 10px;
+}
+
+.board:hover .board-info{
+    display: block;
 }
 
 .fas.fa-star{
     color:gold;
+}
+
+.poster{
+    width: 185px;
 }

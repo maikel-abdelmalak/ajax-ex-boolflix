@@ -39,9 +39,9 @@ function cerca_film (){
                     var titoloOriginale = film[i].original_title;
                     var lingua= film[i].original_language;
                     var voto = film[i].vote_average;
-                    var poster = film[i].backdrop_path;
+                    var poster = film[i].poster_path;
 
-                    append_board(titolo, titoloOriginale, lingua, voto)
+                    append_board(titolo, titoloOriginale, lingua, voto, poster)
                 }
 
             },
@@ -82,9 +82,10 @@ function cerca_serie (){
                     var titoloOriginale = tv[i].original_name;
                     var lingua= tv[i].original_language;
                     var voto = tv[i].vote_average;
-                    var poster = tv[i].backdrop_path
+                    var poster = tv[i].poster_path
+                        console.log(poster);
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
-                    append_board(titolo, titoloOriginale, lingua, voto)
+                    append_board(titolo, titoloOriginale, lingua, voto, poster)
                 }
 
             },
@@ -104,7 +105,13 @@ function cerca_serie (){
 
 function append_board(titolo, titoloOriginale, lingua, voto, poster){
     //con handlebarsinserisco i dati nel dom
-    var sfondo = 'https://image.tmdb.org/t/p/w185/'+poster;
+    if(poster != null){
+        var sfondo = 'https://image.tmdb.org/t/p/w185/'+poster;
+    }else{
+        sfondo = 'img/non-disponibile.png'
+    }
+
+
     var stato = bandiera(lingua)
     var stelle = stars(voto)
     var source   = $('#board-template').html()
