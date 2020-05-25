@@ -24,12 +24,11 @@
 
         </main>
         <script id="ul-template" type="text/x-handlebars-template">
-            <ul>
+            <ul class='board'>
                 <li>Titolo:{{titolo}}</li>
                 <li>Titolo-originale:{{titoloOriginale}}</li>
-                <li>{{lingua}}</li>
-                <li>{{{voto}}}
-                </li>
+                <li> <img src="img/{{lingua}}.png" alt=""></li>
+                <li>{{{voto}}}</li>
             </ul>
         </script>
         <script id="errore-template" type="text/x-handlebars-template">

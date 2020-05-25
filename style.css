@@ -24,6 +24,8 @@ header{
     background-color: #111;
     padding: 15px 50px;
     width: 100%;
+    position: fixed;
+    top: 0;
 }
 
 .logo{
@@ -45,7 +47,10 @@ header{
 }
 
 main{
-    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 110px;
 }
 
 .errore{
@@ -56,11 +61,19 @@ main{
     padding-top: 45px;
 }
 
-ul{
+.board{
     padding: 20px;
     border: 2px solid #fff;
     width: 200px;
     margin: 10px;
-    float: left;
     list-style: none;
+}
+
+.board img{
+    width: 5px;
+    height: 5px;
+}
+
+.fas.fa-star{
+    color:gold;
 }
