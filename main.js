@@ -31,23 +31,16 @@ function cerca_film (){
             },
             success: function(data){
                 //recupero i risultati
-                var film = data.results
+                var tv = data.results
                 //ciclo gli oggetti all'interno dell'array film
-                for (var i = 0; i < film.length; i++) {
+                for (var i = 0; i < tv.length; i++) {
                     //recupero i 4 dati
-                    var titolo = film[i].title;
-                    var titoloOriginale = film[i].original_title;
-                    var lingua= film[i].original_language;
-                    var voto = film[i].vote_average;
-                    //con handlebars creo una lista in cui inserisco i dati di ogni film
-                    var t = stars(voto)
-                    console.log(t);
-                    console.log(voto);
-                    var source   = $('#ul-template').html()
-                    var template = Handlebars.compile(source);
-                    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:t}
-                    var html = template(context);
-                    $('main').append(html);
+                    var titolo = tv[i].title;
+                    var titoloOriginale = tv[i].original_title;
+                    var lingua= tv[i].original_language;
+                    var voto = tv[i].vote_average;
+
+                    append_board(titolo, titoloOriginale, lingua, voto)
                 }
 
             },
@@ -62,6 +55,9 @@ function cerca_film (){
         })
     }
 }
+
+
+
 function cerca_serie (){
     //recupero il valore dell'input
     var ricerca = $('.search input').val()
@@ -86,14 +82,7 @@ function cerca_serie (){
                     var lingua= film[i].original_language;
                     var voto = film[i].vote_average;
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
-                    var t = stars(voto)
-                    console.log(t);
-                    console.log(voto);
-                    var source   = $('#ul-template').html()
-                    var template = Handlebars.compile(source);
-                    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: lingua, voto:t}
-                    var html = template(context);
-                    $('main').append(html);
+                    append_board(titolo, titoloOriginale, lingua, voto)
                 }
 
             },
@@ -109,6 +98,18 @@ function cerca_serie (){
     }
 }
 
+
+
+function append_board(titolo, titoloOriginale, lingua, voto){
+    //con handlebars creo una lista in cui inserisco i dati di ogni film
+    var stato = bandiera(lingua)
+    var stelle = stars(voto)
+    var source   = $('#ul-template').html()
+    var template = Handlebars.compile(source);
+    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle}
+    var html = template(context);
+    $('main').append(html);
+}
 function stars(nu){
     var rate = nu / 2;
     var rate = Math.round(rate)
@@ -126,4 +127,12 @@ function stars(nu){
 
 }
 
+function bandiera(sigla){
+    if(sigla == 'en'|| sigla == 'it'|| sigla == 'fr'){
+        var stato = '<img src="img/'+sigla+'.png" alt="">'
+    }else{
+        stato=sigla;
+    }
+    return stato
+}
 })
