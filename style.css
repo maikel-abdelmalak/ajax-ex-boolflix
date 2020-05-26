@@ -79,6 +79,7 @@ header{
 /* MAIN */
 main{
     padding: 110px 10px 0px 50px;
+    color: #fff;
 }
 
 .original-title{
@@ -86,6 +87,7 @@ main{
     font-size: 18px;
     width: 561px;
     display: inline-block;
+    margin-bottom: 30px;
 }
 
 .original-title h1{
@@ -94,13 +96,15 @@ main{
     margin-bottom: 10px;
 }
 
+.section h2{
+    margin-left: 5px;
+}
 
 .wrapper{
-    flex-wrap: wrap;
-    justify-content: center;
     display: flex;
     padding: 10px 0;
     margin-bottom: 20px;
+    overflow-x: hidden;
 }
 
 
@@ -120,9 +124,16 @@ main{
 .board{
     width: 185px;
     height: 300px;
-    margin: 10px;
+    margin: 5px;
     position: relative;
     display: flex;
+}
+
+.board-container h3{
+    width: 175px;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
 }
 
 .board-info{

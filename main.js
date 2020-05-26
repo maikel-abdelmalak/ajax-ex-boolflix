@@ -1,24 +1,27 @@
 $(document).ready(function(){
-//al click del bottone search faccio apparire l'input di ricerca
-$('.search button').click(function(){
-    $('.search input').css("width", "180px")
-})
 //uso le funzioni cerca film e serie per riempire la pagina prima della ricerca dell'utente
 cerca_film('netflix')
-cerca_serie('la casa di carta')
+cerca_serie('batman')
 
 //intercetto il click sul bottone e richiamo la funzione cerca_film
 $('.search button').on('click', function(){
     //recupero il valore dell'input
     var ricerca = $('.search input').val()
-    $('.wrapper').empty()
-    cerca_film(ricerca)
-    cerca_serie(ricerca)
+    //se l'input è vuoto al click del bottone search faccio apparire l'input di ricerca
+    if(ricerca == ''){
+    $('.search input').css("width", "180px")
+    }else{
+        //altrimenti richiamo le funzioni cerca film e serie
+         $('.wrapper').empty()
+        cerca_film(ricerca)
+        cerca_serie(ricerca)
+    }
+
 })
 
 $('.search input').keypress(function(event) {
   if ( event.which == 13 ) {
-      $('.wrapper').empty()
+
       //recupero il valore dell'input
       var ricerca = $('.search input').val()
      cerca_film(ricerca);
