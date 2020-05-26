@@ -9,28 +9,46 @@ $('.search button').on('click', function(){
     var ricerca = $('.search input').val()
     //se l'input è vuoto al click del bottone search faccio apparire l'input di ricerca
     if(ricerca == ''){
-    $('.search input').css("width", "180px")
+    $('.search input').css({"width":"180px", "padding":"0px 5px"})
     }else{
         //altrimenti richiamo le funzioni cerca film e serie
-         $('.wrapper').empty()
-        cerca_film(ricerca)
-        cerca_serie(ricerca)
+        search()
     }
 
 })
-
+//intercetto il keypress su invio
 $('.search input').keypress(function(event) {
   if ( event.which == 13 ) {
+      search()
 
-      //recupero il valore dell'input
-      var ricerca = $('.search input').val()
-     cerca_film(ricerca);
-     cerca_serie (ricerca)
  }
 
 })
+//al click del logo rimposto la pagina iniziale
+$('.logo img').click(function(){
+    $('.original-title').show()
+    cerca_film('netflix')
+    cerca_serie('batman')
+    $('.film-container h2').text('Film')
+    $('.serie-container h2').text('Serie Tv');
+})
 
 //FUNZIONI
+function search(){
+    //nascondo il "titolo"
+    $('.original-title').hide()
+    //svuoto i contenitori
+    $('.wrapper').empty()
+    //recupero il valore dell'input
+    var ricerca = $('.search input').val()
+    //richiamo le funzioni di chiamata
+    cerca_film(ricerca);
+    cerca_serie(ricerca);
+    //modifico i testi dei titoli delle sezioni
+    $('.film-container h2').text('Film trovati per: "' + ricerca + '"')
+    $('.serie-container h2').text('Serie Tv trovate per: "' + ricerca + '"');
+}
+
 //ajax film
 function cerca_film (ricerca){
 //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
@@ -55,8 +73,10 @@ function cerca_film (ricerca){
                     var lingua= film[i].original_language;
                     var voto = film[i].vote_average;
                     var poster = film[i].poster_path;
+                    var overwiew = film[i].overview;
+                    console.log(overwiew);
 
-                    append_board(wrapper_film, titolo, titoloOriginale, lingua, voto, poster)
+                    append_board(wrapper_film, titolo, titoloOriginale, lingua, voto, poster, overwiew)
                 }
 
             },
@@ -96,10 +116,10 @@ function cerca_serie (ricerca){
                     var titoloOriginale = tv[i].original_name;
                     var lingua= tv[i].original_language;
                     var voto = tv[i].vote_average;
-                    var poster = tv[i].poster_path
+                    var poster = tv[i].poster_path;
+                    var overwiew = tv[i].overview;
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
-                    append_board(wrapper_serie, titolo, titoloOriginale, lingua, voto, poster)
-                    console.log(wrapper_serie);
+                    append_board(wrapper_serie, titolo, titoloOriginale, lingua, voto, poster, overwiew)
                 }
 
             },
@@ -117,7 +137,7 @@ function cerca_serie (ricerca){
 
 
 //crea card
-function append_board(contenitore, titolo, titoloOriginale, lingua, voto, poster){
+function append_board(contenitore, titolo, titoloOriginale, lingua, voto, poster, overwiew){
     //con handlebarsinserisco i dati nel dom
     if(poster != null){
         var sfondo = 'https://image.tmdb.org/t/p/w185/'+poster;
@@ -130,7 +150,7 @@ function append_board(contenitore, titolo, titoloOriginale, lingua, voto, poster
     var stelle = stars(voto)
     var source   = $('#board-template').html()
     var template = Handlebars.compile(source);
-    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle, poster:sfondo}
+    var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle, poster:sfondo, overwiew:overwiew}
     var html = template(context);
     contenitore.append(html);
 
@@ -163,4 +183,6 @@ function bandiera(sigla){
     }
     return stato
 }
+
+
 })
