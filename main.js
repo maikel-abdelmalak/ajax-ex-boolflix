@@ -1,14 +1,14 @@
 $(document).ready(function(){
 //intercetto il click sul bottone e richiamo la funzione cerca_film
 $('.search button').on('click', function(){
-    $('main').empty()
+    $('.wrapper').empty()
     cerca_film()
     cerca_serie()
 })
 
 $('.search input').keypress(function(event) {
   if ( event.which == 13 ) {
-      $('main').empty()
+      $('.wrapper').empty()
      cerca_film();
      cerca_serie ()
  }
@@ -16,7 +16,9 @@ $('.search input').keypress(function(event) {
 })
 
 //FUNZIONI
+//ajax film
 function cerca_film (){
+
     //recupero il valore dell'input
     var ricerca = $('.search input').val()
     //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
@@ -30,6 +32,7 @@ function cerca_film (){
                 'query': ricerca,
             },
             success: function(data){
+                var wrapper_film = $('.film')
                 //recupero i risultati
                 var film = data.results
                 //ciclo gli oggetti all'interno dell'array film
@@ -41,7 +44,7 @@ function cerca_film (){
                     var voto = film[i].vote_average;
                     var poster = film[i].poster_path;
 
-                    append_board(titolo, titoloOriginale, lingua, voto, poster)
+                    append_board(wrapper_film, titolo, titoloOriginale, lingua, voto, poster)
                 }
 
             },
@@ -51,15 +54,16 @@ function cerca_film (){
                 var template = Handlebars.compile(source);
                 var context = {numeroErrore: numero, tipoErrore: c}
                 var html = template(context);
-                $('main').append(html);
+                $('.film').append(html);
             }
         })
     }
 }
 
 
-
+//ajax serie tv
 function cerca_serie (){
+
     //recupero il valore dell'input
     var ricerca = $('.search input').val()
     //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
@@ -73,6 +77,7 @@ function cerca_serie (){
                 'query': ricerca,
             },
             success: function(data){
+                var wrapper_serie = $('.serie')
                 //recupero i risultati
                 var tv = data.results
                 //ciclo gli oggetti all'interno dell'array film
@@ -83,9 +88,9 @@ function cerca_serie (){
                     var lingua= tv[i].original_language;
                     var voto = tv[i].vote_average;
                     var poster = tv[i].poster_path
-                        console.log(poster);
                     //con handlebars creo una lista in cui inserisco i dati di ogni film
-                    append_board(titolo, titoloOriginale, lingua, voto, poster)
+                    append_board(wrapper_serie, titolo, titoloOriginale, lingua, voto, poster)
+                    console.log(wrapper_serie);
                 }
 
             },
@@ -95,15 +100,15 @@ function cerca_serie (){
                 var template = Handlebars.compile(source);
                 var context = {numeroErrore: numero, tipoErrore: c}
                 var html = template(context);
-                $('main').append(html);
+                $('.serie').append(html);
             }
         })
     }
 }
 
 
-
-function append_board(titolo, titoloOriginale, lingua, voto, poster){
+//crea card
+function append_board(contenitore, titolo, titoloOriginale, lingua, voto, poster){
     //con handlebarsinserisco i dati nel dom
     if(poster != null){
         var sfondo = 'https://image.tmdb.org/t/p/w185/'+poster;
@@ -118,8 +123,10 @@ function append_board(titolo, titoloOriginale, lingua, voto, poster){
     var template = Handlebars.compile(source);
     var context = {titolo: titolo, titoloOriginale: titoloOriginale, lingua: stato, voto:stelle, poster:sfondo}
     var html = template(context);
-    $('main').append(html);
+    contenitore.append(html);
+
 }
+
 //funzione per stampare le stelle che rappresentano il voto
 function stars(nu){
     var rate = nu / 2;
