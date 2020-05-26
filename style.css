@@ -60,6 +60,20 @@ header{
     padding: 10px;
     font-size: 18px;
 }
+
+.search button:focus{
+    outline: none;
+}
+
+.search input{
+    transition: width 1s;
+    width:0px;
+    border: none;
+}
+
+.search input:focus{
+    outline: none;
+}
 /* fine header */
 
 /* MAIN */
@@ -70,7 +84,7 @@ main{
 .original-title{
     color: #fff;
     font-size: 18px;
-    width: 70%;
+    width: 561px;
     display: inline-block;
 }
 
@@ -85,8 +99,7 @@ main{
     flex-wrap: wrap;
     justify-content: center;
     display: flex;
-    height: 300px;
-    background-color: #fff;
+    padding: 10px 0;
     margin-bottom: 20px;
 }
 

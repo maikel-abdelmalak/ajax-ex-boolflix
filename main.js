@@ -1,27 +1,36 @@
 $(document).ready(function(){
+//al click del bottone search faccio apparire l'input di ricerca
+$('.search button').click(function(){
+    $('.search input').css("width", "180px")
+})
+//uso le funzioni cerca film e serie per riempire la pagina prima della ricerca dell'utente
+cerca_film('netflix')
+cerca_serie('la casa di carta')
+
 //intercetto il click sul bottone e richiamo la funzione cerca_film
 $('.search button').on('click', function(){
+    //recupero il valore dell'input
+    var ricerca = $('.search input').val()
     $('.wrapper').empty()
-    cerca_film()
-    cerca_serie()
+    cerca_film(ricerca)
+    cerca_serie(ricerca)
 })
 
 $('.search input').keypress(function(event) {
   if ( event.which == 13 ) {
       $('.wrapper').empty()
-     cerca_film();
-     cerca_serie ()
+      //recupero il valore dell'input
+      var ricerca = $('.search input').val()
+     cerca_film(ricerca);
+     cerca_serie (ricerca)
  }
 
 })
 
 //FUNZIONI
 //ajax film
-function cerca_film (){
-
-    //recupero il valore dell'input
-    var ricerca = $('.search input').val()
-    //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
+function cerca_film (ricerca){
+//se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
     if(ricerca != ''){
         $.ajax({
 
@@ -62,11 +71,8 @@ function cerca_film (){
 
 
 //ajax serie tv
-function cerca_serie (){
-
-    //recupero il valore dell'input
-    var ricerca = $('.search input').val()
-    //se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
+function cerca_serie (ricerca){
+//se l'input non è vuoto faccio una chiamata ajax in qui la query è il valore dell'input
     if(ricerca != ''){
         $.ajax({
 
