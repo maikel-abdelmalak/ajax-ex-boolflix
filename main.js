@@ -26,7 +26,9 @@ $('.search input').keypress(function(event) {
 })
 //al click del logo rimposto la pagina iniziale
 $('.logo img').click(function(){
+    $('header input').val('')
     $('.original-title').show()
+    $('.wrapper').empty()
     cerca_film('netflix')
     cerca_serie('batman')
     $('.film-container h2').text('Film')
@@ -74,8 +76,7 @@ function cerca_film (ricerca){
                     var voto = film[i].vote_average;
                     var poster = film[i].poster_path;
                     var overwiew = film[i].overview;
-                    console.log(overwiew);
-
+                    //con la funzione append board creo le card in pagine
                     append_board(wrapper_film, titolo, titoloOriginale, lingua, voto, poster, overwiew)
                 }
 

@@ -72,7 +72,7 @@ header{
     width:0px;
     border: none;
     height: 25px;
-
+    border-radius: 3px;
 }
 
 .search input:focus{
