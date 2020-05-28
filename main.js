@@ -14,7 +14,6 @@ $('.search button').on('click', function(){
         //altrimenti richiamo le funzioni cerca film e serie
         search()
     }
-
 })
 //intercetto il keypress su invio
 $('.search input').keypress(function(event) {
@@ -34,6 +33,54 @@ $('.logo img').click(function(){
     $('.film-container h2').text('Film')
     $('.serie-container h2').text('Serie Tv');
 })
+
+
+//lista generi
+var generi_tv = [];
+$.ajax({
+
+    'url': 'https://api.themoviedb.org/3/genre/tv/list',
+    'method': 'GET',
+    'data': {
+        'api_key': 'ca530b2f29c17ae553941132a3b631ce',
+        'language': 'it',
+    },
+    success: function(data){
+        var generi = data.genres;
+        for (var i = 0; i < generi.length; i++) {
+             generi_tv[i] = generi[i]
+        }
+
+    },
+    error: function(a, b, c){
+        var numero = a.status;
+        alert(numero)
+    }
+})
+
+var generi_film = [];
+$.ajax({
+
+    'url': 'https://api.themoviedb.org/3/genre/movie/list',
+    'method': 'GET',
+    'data': {
+        'api_key': 'ca530b2f29c17ae553941132a3b631ce',
+        'language': 'it',
+    },
+    success: function(data){
+        var generi = data.genres;
+        for (var i = 0; i < generi.length; i++) {
+             generi_film[i] = generi[i]
+        }
+
+    },
+    error: function(a, b, c){
+        var numero = a.status;
+        alert(numero)
+    }
+})
+
+console.log(generi_film);
 
 //FUNZIONI
 function search(){
